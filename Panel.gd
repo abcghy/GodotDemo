@@ -11,14 +11,14 @@ func _ready():
 
 func _process(delta):
 	var velocity = Vector2()
-#	if Input.is_action_pressed("ui_down"):
-#		velocity.y += 1
-#	if Input.is_action_pressed("ui_up"):
-#		velocity.y -= 1
-#	if Input.is_action_pressed("ui_right"):
-#		velocity.x += 1
-#	if Input.is_action_pressed("ui_left"):
-#		velocity.x -= 1
+	if Input.is_action_pressed("ui_down"):
+		velocity.y += 1
+	if Input.is_action_pressed("ui_up"):
+		velocity.y -= 1
+	if Input.is_action_pressed("ui_right"):
+		velocity.x += 1
+	if Input.is_action_pressed("ui_left"):
+		velocity.x -= 1
 	var left_horizontal = Input.get_joy_axis(0, JOY_AXIS_0) # Horizontal
 	var left_vertical = Input.get_joy_axis(0, JOY_AXIS_1)
 	velocity.x += left_horizontal

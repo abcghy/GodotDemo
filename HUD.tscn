@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://HUD.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -14,7 +15,14 @@ font_data = ExtResource( 1 )
 size = 64
 font_data = ExtResource( 1 )
 
+[sub_resource type="InputEventAction" id=4]
+action = "ui_select"
+
+[sub_resource type="ShortCut" id=5]
+shortcut = SubResource( 4 )
+
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource( 2 )
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchor_right = 1.0
@@ -51,9 +59,14 @@ margin_top = -200.0
 margin_right = 90.0
 margin_bottom = -100.0
 custom_fonts/font = SubResource( 3 )
+shortcut = SubResource( 5 )
 text = "Start"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_MessageTimer_timeout"]

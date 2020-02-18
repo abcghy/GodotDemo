@@ -5,17 +5,24 @@ var score
 
 func _ready():
 	randomize()
-	new_game()
 
 func game_over():
 	print("结束")
 	$ScoreTimer.stop()
 	$MobTimer.stop()
+	$HUD.show_game_over()
+	
+	$Music.stop()
+	$DeathSound.play()
 	
 func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$HUD.update_score(score)
+	$HUD.show_message("Get Ready")
+	
+	$Music.play()
 
 
 func _on_MobTimer_timeout():
@@ -30,10 +37,13 @@ func _on_MobTimer_timeout():
 	
 	mob.linear_velocity = Vector2(rand_range(mob.min_speed, mob.max_speed), 0)
 	mob.linear_velocity = mob.linear_velocity.rotated(direction)
+	
+	$HUD.connect("start_game", mob, "_on_start_game")
 
 
 func _on_ScoreTimer_timeout():
 	score += 1
+	$HUD.update_score(score)
 	print("分数：", score)
 
 
